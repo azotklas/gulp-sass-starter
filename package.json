@@ -11,7 +11,7 @@
     "starter",
     "project"
   ],
-  "author": "Denis Pitlyak",
+  "author": "DEPI",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.26.3",
