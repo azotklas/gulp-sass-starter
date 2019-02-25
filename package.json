@@ -1,7 +1,7 @@
 {
   "name": "gulp-starter",
   "version": "1.0.0",
-  "description": "This is gulp starter project by Denis Pitlyak from Belarus",
+  "description": "This is gulp starter project by DEPI from Belarus",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
