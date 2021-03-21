@@ -15,26 +15,26 @@ const sourcemaps = require('gulp-sourcemaps');
 
 // Define paths
 var paths = {
-    base: {
-        base: './',
-        node: 'node_modules'
-    },
-    src: {
-        base: './',
-        html: 'src/**/*.html',
-        sass: 'src/sass/**/*.sass',
-        css: 'src/css/**/*.css',
-        js: 'src/scripts/**/*.js',
-        cssdir: 'src/css',
-        img: 'src/images',
-        fonts:'src/fonts'
-    },
-    dist: {
-        base: './dist',
-        css: 'dist/css',
-        js: 'dist/js',
-        img:'dist/images'
-    }
+  base: {
+    base: './',
+    node: 'node_modules'
+  },
+  src: {
+    base: './',
+    html: 'src/**/*.html',
+    sass: 'src/sass/**/*.sass',
+    css: 'src/css/**/*.css',
+    js: 'src/scripts/**/*.js',
+    cssdir: 'src/css',
+    img: 'src/images',
+    fonts: 'src/fonts'
+  },
+  dist: {
+    base: './dist',
+    css: 'dist/css',
+    js: 'dist/js',
+    img: 'dist/images'
+  }
 };
 
 // BrowserSync
@@ -69,12 +69,12 @@ function copyHtml(done) {
 }
 
 function images(done) {
-  src(paths.src.img+'/*').pipe(dest(paths.dist.img));
+  src(paths.src.img + '/*').pipe(dest(paths.dist.img));
   done();
 }
 
 function imagesMin(done) {
-  src(paths.src.img+'/*')
+  src(paths.src.img + '/*')
     .pipe(
       cache(
         imagemin({
@@ -101,7 +101,7 @@ function css() {
     .pipe(sass())
     .pipe(concat('main.min.css'))
     .pipe(sourcemaps.write({ includeContent: false }))
-    .pipe(plumber.stop()) 
+    .pipe(plumber.stop())
     .pipe(dest(paths.dist.css))
     .pipe(browsersync.stream());
 }
@@ -115,7 +115,7 @@ function js() {
       suffix: '.min'
     }))
     .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: '../../'}))
+    .pipe(sourcemaps.write('.', { includeContent: false, sourceRoot: '../../' }))
     .pipe(dest(paths.dist.js));
 }
 
@@ -129,7 +129,7 @@ function optimizeJS() {
       suffix: '.min'
     }))
     .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(sourcemaps.write('.', {includeContent: false, sourceRoot: '../../'}))
+    .pipe(sourcemaps.write('.', { includeContent: false, sourceRoot: '../../' }))
     .pipe(dest(paths.dist.js));
 }
 
@@ -143,8 +143,8 @@ function watchFiles() {
 // Complex tasks
 // gulp dev
 exports.dev = series(clear, copyHtml, parallel(images, css, fonts, js), parallel(watchFiles, browserSync));
-// gulp build
-exports.build = series(clear, copyHtml, imagesMin, css, fonts, optimizeJS);
+// gulp prod
+exports.prod = series(clear, copyHtml, imagesMin, css, fonts, optimizeJS);
 // gulp clean
 exports.clean = clear;
 // gulp
